@@ -51,8 +51,8 @@ results_put.index = results_put.index.map(lambda x: x[:5] + '...' + x[-3:])
 results_call = results_call.sort_values(ascending=False)
 results_put = results_put.sort_values(ascending=False)
 
-results_call
-results_put
+print(f"Eligible for volume-based airdrop call {len(results_call)}".format())
+print(f"Eligible for volume-based airdrop put {len(results_put)}".format())
 
 for i in range(len(results_call)):
      print(results_call.index[i], '   ', round(results_call.iloc[i], 2))
