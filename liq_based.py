@@ -6,6 +6,7 @@ import time
 # int(datetime.datetime(2023, 4, 23, 23, 59, 59).strftime('%s')) + 2*3600
 START = 1682294399
 END = START + 7 * 24 * 3600
+TOKENS_DISTRIBUTED = 125_000
 
 r = requests.get("https://api.carmine.finance/api/v1/mainnet/all-transactions")
 data = r.json()
@@ -42,7 +43,7 @@ call_pool = df[df['liquidity_pool'] == "Call"].copy().reset_index(drop = True)
 put_pool = df[df['liquidity_pool'] == "Put"].copy().reset_index(drop = True)
 
 
-def get_token_share(df: pd.DataFrame, START: int, END: int) -> pd.DataFrame:
+def get_token_share(df: pd.DataFrame, START: int, END: int, TOKENS_DISTRIBUTED: int) -> pd.DataFrame:
     res = []
 
     # Iterate over callers
@@ -78,11 +79,11 @@ def get_token_share(df: pd.DataFrame, START: int, END: int) -> pd.DataFrame:
 
     res = pd.DataFrame(res).sort_values('min_minted_cum', ascending = False).reset_index(drop = True)
     res['share'] = res['min_minted_cum'] / res['min_minted_cum'].sum()
-    res['share_tokens'] = res['share'] * 125_000
+    res['share_tokens'] = res['share'] * TOKENS_DISTRIBUTED
     return res
 
-call_res = get_token_share(call_pool, START, END)
-put_res = get_token_share(put_pool, START, END)
+call_res = get_token_share(call_pool, START, END, TOKENS_DISTRIBUTED)
+put_res = get_token_share(put_pool, START, END, TOKENS_DISTRIBUTED)
 
 call_res['caller_short'] = call_res['caller'].map(lambda x: x[:5] + '...' + x[-3:])
 put_res['caller_short'] = put_res['caller'].map(lambda x: x[:5] + '...' + x[-3:])
