@@ -1,8 +1,12 @@
 # Done by Marek in https://discord.com/channels/969228248552706078/1045794107760574475/1097629679504085076
 
 import requests
-import json
 import pandas as pd
+
+# int(datetime.datetime(2023, 4, 23, 23, 59, 59).strftime('%s')) + 2*3600
+START = 1682294399
+END = START + 7 * 24 * 3600
+TOKENS_DISTRIBUTED = 125_000
 
 r = requests.get("https://api.carmine.finance/api/v1/mainnet/all-transactions")
 data = r.json()
@@ -17,7 +21,7 @@ df['capital_transfered'] = df['capital_transfered'].map(lambda x: int(x, 0))
 df['tokens_minted'] = df['tokens_minted'].map(lambda x: int(x, 0))
 # df['strike_price'] = df['strike_price'].map(lambda x: int(x, 0))
 df = df[['timestamp', 'caller', 'capital_transfered', 'tokens_minted', 'option_side', 'option_type', 'strike_price']]
-df = df[df['timestamp'] < 1681689599]
+df = df[(df['timestamp'] >= START) & (df['timestamp'] <= END)]
 
 def calc_premium(row: pd.Series) -> float:
     if row['option_side'] == 0:  # long
@@ -50,17 +54,21 @@ df = df[~df.caller.isin({
 
 call_distribution = df[df['option_type'] == 0]
 put_distribution = df[df['option_type'] == 1]
+
 results_call_premia = call_distribution.groupby('caller')['premium'].sum()
-results_call = results_call_premia / results_call_premia.sum() * 125000
+results_call = results_call_premia / results_call_premia.sum() * TOKENS_DISTRIBUTED
 results_call.index = results_call.index.map(lambda x: x[:5] + '...' + x[-3:])
-results_put = put_distribution.groupby('caller')['premium'].sum()
-results_put = results_put / results_put.sum() * 125000
-results_put.index = results_put.index.map(lambda x: x[:5] + '...' + x[-3:])
 results_call = results_call.sort_values(ascending=False)
+
+results_put = put_distribution.groupby('caller')['premium'].sum()
+results_put = results_put / results_put.sum() * TOKENS_DISTRIBUTED
+results_put.index = results_put.index.map(lambda x: x[:5] + '...' + x[-3:])
 results_put = results_put.sort_values(ascending=False)
 
-print(f"Eligible for volume-based airdrop call {len(results_call)}".format())
-print(f"Eligible for volume-based airdrop put {len(results_put)}".format())
+print(f"Period start: {pd.to_datetime(START, unit='s')}")
+print(f"Period end: {pd.to_datetime(END, unit='s')}")
+print(f"Eligible for volume-based airdrop call {len(results_call)}")
+print(f"Eligible for volume-based airdrop put {len(results_put)}")
 
 for i in range(len(results_call)):
      print(results_call.index[i], '   ', round(results_call.iloc[i], 2))

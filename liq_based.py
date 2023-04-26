@@ -87,6 +87,8 @@ put_res = get_token_share(put_pool, START, END, TOKENS_DISTRIBUTED)
 call_res['caller_short'] = call_res['caller'].map(lambda x: x[:5] + '...' + x[-3:])
 put_res['caller_short'] = put_res['caller'].map(lambda x: x[:5] + '...' + x[-3:])
 
+print(f"Period start: {pd.to_datetime(START, unit='s')}")
+print(f"Period end: {pd.to_datetime(END, unit='s')}")
 print(f"Eligible for liquidity-based airdrop call {len(call_res)}")
 print(f"Eligible for liquidity-based airdrop put {len(put_res)}")
 
