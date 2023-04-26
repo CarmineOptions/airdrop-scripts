@@ -57,7 +57,8 @@ def get_token_share(df: pd.DataFrame, START: int, END: int, TOKENS_DISTRIBUTED: 
         
         # Since there is possibility that the user had sth staked before selected period,
         # new row is added at the begining of the period(if it's not already there)
-        # and then ffilled, so it takes on the previous value
+        # and then filled(method = 'ffill' first and then with zero), so it takes on the previous value
+        # and if there is none then it's filled with zero to indicate there was no previous deposit
         # This is done so that information about previous deposit is stored and not lost
         # when slicing df on timestamp
         if START not in list(tmp['timestamp']):
@@ -65,7 +66,7 @@ def get_token_share(df: pd.DataFrame, START: int, END: int, TOKENS_DISTRIBUTED: 
                 {'timestamp': START, 'caller': user, 'minted_cum' : None}
             ]
             tmp = pd.concat([tmp, pd.DataFrame(new_rows)]).reset_index(drop=True).sort_values('timestamp')
-            tmp['minted_cum'] = tmp['minted_cum'].fillna(method = 'ffill')
+            tmp['minted_cum'] = tmp['minted_cum'].fillna(method = 'ffill').fillna(0)
 
         # Select period
         tmp = tmp[(tmp['timestamp'] >= START) & (tmp['timestamp'] <= END)]
