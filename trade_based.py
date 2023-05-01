@@ -17,14 +17,19 @@ data = r.json()
 print('State of the download of data: ', data['status'])
 print('Number of observations: ', data['length'])
 
-# Expand 'option' collumn into separate collumns 
+# Select only events related to trading
 df = pd.DataFrame.from_records([x for x in data['data'] if x['action'] in {'TradeClose', 'TradeOpen'}])
+
+# Expand 'option' collumn into separate collumns 
 df['option_side'] = df['option'].map(lambda x: x['option_side'])
 df['option_type'] = df['option'].map(lambda x: x['option_type'])
 df['strike_price'] = df['option'].map(lambda x: int(x['strike_price'], 0)) / 2**61
 df['capital_transfered'] = df['capital_transfered'].map(lambda x: int(x, 0))
 df['tokens_minted'] = df['tokens_minted'].map(lambda x: int(x, 0))
+
+# Select only relevant collumns
 df = df[['timestamp', 'caller', 'capital_transfered', 'tokens_minted', 'option_side', 'option_type', 'strike_price']]
+# Select entries for given period
 df = df[(df['timestamp'] >= START) & (df['timestamp'] <= END)]
 
 # Function from calculating premia from transaction info

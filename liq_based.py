@@ -3,12 +3,12 @@
 import requests
 import pandas as pd
 
-# Define starting end ending time of the evaluated period
+# Define starting and ending time of the evaluated period
 START = 1682294399
 END = START + 7 * 24 * 3600
 # Number of tokens distributed in the evaluated period
 TOKENS_DISTRIBUTED = 125_000
-IS_FIRST_WEEK = True
+IS_FIRST_WEEK = True # First week rewards are calculated slightly differently
 
 # Fetch data from carmine database
 # The database stores all Trade and Liquidity events - 
