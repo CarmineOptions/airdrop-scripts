@@ -1,3 +1,5 @@
+# Script for generating list of Liquidity provision based rewards
+
 import requests
 import pandas as pd
 

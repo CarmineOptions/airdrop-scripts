@@ -1,4 +1,4 @@
-# Done by Marek in https://discord.com/channels/969228248552706078/1045794107760574475/1097629679504085076
+# Script for generating list of Trading based rewards
 
 import requests
 import pandas as pd
