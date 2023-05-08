@@ -1209,3 +1209,79 @@ Marek — Yesterday at 9:44 PM
 Hi @TrapRuslanCrypto  , this is quite likely metamask wallet... you have to provide StarkNet wallet (Braavos, ArgentX, OpenZeppelin) 
 Hura — Today at 12:17 AM
 0x064074e0EF2e6c6aE417f530A64FbEdD86A201B63Cd072e2e4b6c54f27ffA9b3
+Marek — 05/01/2023 1:22 PM
+Hi 
+
+@u17ga1 @Jiimmy @Senpai @saksham @EnZocodex @Wilnyaf.com @jaggujaggu @Ansarikfaizan786 l Suiswap @arrowpm @Western_bug @Papu Turbos Finance SuiGoats @Tonton | Jc97354 @CDRom | Suiswap @joannaczok  | Suiswap @PasaPanther @kamatis1993 "| Sui Global @manashgope6🌽🌽  @Dipak123 @bauribisnu27 @gavubauri3 @Doud @vinuz @MexaHuk @Taste @jurant  @Thuongvtt @theHawk @epikuri 
+@ishu | Suiswap @MoonChild | Suiswap 
+
+you did not provide your starknet address (Braavos/ArgentX/OpenZeppelin) to collect tokens for testnet role
+theHawk — 05/01/2023 1:25 PM
+0x01959ed177FFb489a094Ad9D45C913aBdC9f543Abd2f3a5953FbF29C794a92DD
+u17ga1 — 05/01/2023 2:03 PM
+0x055122BEc21BAE6029E67e70fEb87F3A6C2e6439db417774BE1Ef4F224Ab3b32
+Tonton | Jc97354 — 05/01/2023 4:51 PM
+0x0198C8cEe43Be2F0c935d686689ca46423B78DDA95229a67917d20145F1e563e
+EnZocodex — 05/01/2023 5:02 PM
+0x048c8095814c8E076CcBD78540dEe8d5a799ea1AD4f2814D01D418563cB0C4b7
+Wilnyaf.com — 05/01/2023 8:56 PM
+0x04195E7d8552A502e5C31b8c058e2E2CfC8C9209F27304D60BFEA49c54E65a8d
+MEE6
+BOT
+ — 05/01/2023 8:56 PM
+GG @Wilnyaf.com, you just advanced to level 1!
+AnniePro — 05/02/2023 11:49 PM
+0x062b7fF1903480dc757ECc3e5d9AE5a93145ca49693D39C63f01621eb6f9083c
+Avidxdesign — 05/02/2023 11:57 PM
+0x032f95c555dfc4dab1694600014783c3a2625b3f835b54c93c7424d718b661c7
+Jiimmy — 05/03/2023 8:51 AM
+0x027495304ed75F5257EC68e053e13B4B842Ec9AE65b4720e2EE88b31ecC37A71
+Jiimmy — 05/03/2023 8:51 AM
+thanks for remind me,forget this very busy work
+TrapRuslanCrypto — 05/04/2023 10:14 AM
+0x02eAc2e4ed91Ba014cFBB4c563060290efFec262dCeB4C710D498Eb50326cd1A
+abubakar | Suiswap|NemoSwap — 05/05/2023 1:36 AM
+0x02be6497Ea3006dE037810A917625C0Ff3b0530b2d69AC3991d6fD93fA9D910d
+Hansel — 05/05/2023 3:29 AM
+0x009A7AD745fa597D7dAA66e846D9c904fad03670e466DeD471De84F6fF604D02
+Wrapped Jerem — 05/05/2023 1:00 PM
+0x0462efB36B9b8540692d3391937aaE45aC2F43484aF47577731dFD5d44cC12e2
+chico — 05/05/2023 1:34 PM
+0x0483E19090EAf1601B20dCC36358C7B4468C6Ad9d3C342603Ca7b43E8A94074E
+Виталий N1 | Bay Swap — 05/05/2023 2:13 PM
+0x26eeDDAd2347a4e468Cc0c7d3941a8DE7b59d2d17D9dE8de0A5347a0fE6c620
+Fequa — 05/06/2023 8:28 PM
+0x05EB1a9E30D73906BDBd93E80A37a7241d458Eee81159a2F76097A721AceD3f2
+cezary — Yesterday at 12:54 AM
+0x0146Fa6698D831Fd4fd60d292A518069bAdC6588130d200F150380f44d072CbE
+svetylko
+ pinned 
+a message
+ to this channel. See all 
+pinned messages
+.
+ — Yesterday at 3:11 PM
+waybe — Yesterday at 3:14 PM
+0x07532a05d5724A2C441143B290403Fd022716775185e45EA967b051847361822    it's our mainnet adress
+parwezmansuri — Yesterday at 4:33 PM
+0x40FdcA5cB5de0774eeB3932433a4d12deB400BD2
+Noxian — Yesterday at 5:07 PM
+0x070C3245992e2774Bf9efdcb37a8d5181170d8aB10859036DBbEca204E75AA34
+Gazi D — Yesterday at 7:19 PM
+0x6077d27e13b07418901dc3488bdd840a847c7d0410ce4c6449ccf62f4712b77
+xenos — Yesterday at 9:10 PM
+Testnet 0x01d46d131c82778bfc392dd9898a36aa4f30a0869474739a738def15d2adba40
+Mainnet 0x062e44c78701cdf2984e70d7171d4bb3a7510b6241026dde606cbb7bcb2cbc29
+MEE6
+BOT
+ — Yesterday at 9:10 PM
+GG @xenos, you just advanced to level 1!
+Marek — Yesterday at 9:41 PM
+you have to provide starknet (braavos/argentX/openzeppelin) and not metamask address
+Marek — Today at 9:42 AM
+Hi @parwezmansuri this is metamask address, I will use the previous provided by you 0x04BC57Ece59927e1a16ee601b2eD5D3cc4B64786c0C110eAb847b409E34033f3
+Marek — Today at 11:29 AM
+few other people with testnet role
+@CryptoWild | 🇵🇱 - 0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe
+@oxdimas||🇮🇩- 0x06E7B39f21c1A73A2a266A2A60Ac7FDA4AFE6EbE575bA489c87F68A419EdcA81
+@poolcleaner | 🇺🇦 - 0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45
