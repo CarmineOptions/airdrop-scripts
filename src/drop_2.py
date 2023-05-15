@@ -22,3 +22,23 @@ was used before the replacement
 '''
 give some tokens to puddington#8374, he was doing the sybil filtering for airdrop 1, for the tweets
 '''
+
+
+'''
+https://github.com/CarmineOptions/carmine-protocol/commit/c513ec2c672c10c13f50ecece0cd216c6493cfcc#diff-770ea621de180501274b95ab5d6ac3225b418be5801a8e10bc11210d6f0250f7R8
+has to be updated... ie user can claim "get_eligible_amount minus airdrop_claimed"
+'''
+
+'''
+the json generated from this script will collect both the numbers already written into smart contract
+(first_distribution_calculated.json) plus the numbers from this script
+'''
+
+'''
+periods end with 4th June -> 5th June there will be proposal for the distribution
+'''
+
+'''
+watch out for tokens, since int is not precise enough... so you have to use decimals
+'''
+
