@@ -40,7 +40,9 @@ periods end with 4th June -> 5th June there will be proposal for the distributio
 
 '''
 watch out for tokens, since int is not precise enough... so you have to use decimals
-eastern europe influencer - Marek doda info
+
+Additional tokens:
+александр gets 3kCARM to  wallet 0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f... for sharing info about us in his discord (roughly 12k followers, looks like interesting engagement, good feedback)
  
 Our team
 Presto
