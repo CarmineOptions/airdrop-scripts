@@ -40,5 +40,11 @@ periods end with 4th June -> 5th June there will be proposal for the distributio
 
 '''
 watch out for tokens, since int is not precise enough... so you have to use decimals
+eastern europe influencer - Marek doda info
+ 
+Our team
+Presto
 '''
+
+
 
