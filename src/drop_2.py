@@ -25,6 +25,20 @@ give some tokens to puddington#8374, he was doing the sybil filtering for airdro
 
 
 '''
+Each of these get 500 Carmine Tokens... thanks to campaign with https://twitter.com/Starknet_Allday
+
+@0xygenXT
+: 0x031ac74fe11e3e083513671ebc4f98fac55fe045c0b7229cc74c8a1ae96f1273
+
+@panda840z
+:0x07d5851e60a1Ea9BcA3868070eB34C65395c43eD5cF4b96be0310853994184b1 
+
+@Buduhun7
+:
+0x066463F57b5DE66dF56cf4774e5C6784e70Bbe9b333E9F1339D564A691459193
+'''
+
+'''
 https://github.com/CarmineOptions/carmine-protocol/commit/c513ec2c672c10c13f50ecece0cd216c6493cfcc#diff-770ea621de180501274b95ab5d6ac3225b418be5801a8e10bc11210d6f0250f7R8
 has to be updated... ie user can claim "get_eligible_amount minus airdrop_claimed"
 '''
