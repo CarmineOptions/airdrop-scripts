@@ -183,11 +183,11 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     print(f"\033[93mTotal distributed to core team:\033[0m {sum(core_team.values()):_}")
 
     # Normalize the addresses before summing up so that no values are lost
-    traders_total = {hex(int(key, 0)): value for key, value in traders_total.items()}
-    stakers_total = {hex(int(key, 0)): value for key, value in stakers_total.items()}
-    community_projects = {hex(int(key, 0)): value for key, value in traders_total.items()}
+    traders_total       = {hex(int(key, 0)): value for key, value in traders_total.items()}
+    stakers_total       = {hex(int(key, 0)): value for key, value in stakers_total.items()}
+    community_projects  = {hex(int(key, 0)): value for key, value in community_projects.items()}
     activity_allocation = {hex(int(key, 0)): value for key, value in activity_allocation.items()}
-    core_team = {hex(int(key, 0)): value for key, value in core_team.items()}
+    core_team           = {hex(int(key, 0)): value for key, value in core_team.items()}
     
     # sum everything
     total_tokens = {
