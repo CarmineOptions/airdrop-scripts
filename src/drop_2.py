@@ -74,8 +74,11 @@ Presto - HOW MUCH?
 '''
 
 def get_token_distribution_week_5_8() -> Dict[str, int]:
+    # In total, this airdrop distributes 68_000 for community projects. After previous round there was 136_000
+    # left, so after this airdrop there will be only 68_000 left
     community_projects = {
-        # Mods - 7_500 of these goes from "Marek's discretion"
+        # Mods - 7_500 of these goes from "Marek's discretion" and some numbers are high, because 
+        # not everything was distributed during previous airdrop
         '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500, # Cryptowild
         '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 3_000, # PoolCleaner
         '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 10_500,# JioJiu
@@ -141,6 +144,9 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     week_8_start = week_7_start + 7 * 24 * 3600
     week_8_end = week_8_start + 7 * 24 * 3600
 
+    # There are 78 125 tokens distributed each week. The function takes half (39 062.5) of
+    # it as an argument, because it distributes the passed value in call and put pool separately,
+    # so 78 125 in total
     traders_1 = get_traders_drop(week_5_start, week_6_start, 39_062.5, core_team_addresses)
     traders_2 = get_traders_drop(week_6_start, week_7_start, 39_062.5, core_team_addresses)
     traders_3 = get_traders_drop(week_7_start, week_8_start, 39_062.5, core_team_addresses)
@@ -150,6 +156,9 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
         for k in set(traders_1) | set(traders_2) | set(traders_3) | set(traders_4)
     }
 
+    # There are 78 125 tokens distributed each week. The function takes half (39 062.5) of
+    # it as an argument, because it distributes the passed value in call and put pool separately,
+    # so 78 125 in total
     stakers_1 = get_liquidity_providers_drop(week_5_start, week_6_start, 39_062.5, False, core_team_addresses)
     stakers_2 = get_liquidity_providers_drop(week_6_start, week_7_start, 39_062.5, False, core_team_addresses)
     stakers_3 = get_liquidity_providers_drop(week_7_start, week_8_start, 39_062.5, False, core_team_addresses)
@@ -198,7 +207,7 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
            core_team.get(k, 0)
         for k in set(traders_total) | set(stakers_total) | set(activity_allocation) | set(community_projects) | set(core_team)
     }
-    print(f"\n\033[93mTotal distributed:\033[0m {sum(total_tokens.values()):_}")
+    print(f"\033[93mTotal distributed:\033[0m {sum(total_tokens.values()):_}")
 
 
     # round down the tokens
@@ -235,7 +244,14 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
         k: first_dist.get(k, 0) + int(second_dist.get(k, 0))
         for k in set(first_dist) | set(second_dist)
     }
-    print(f"\n\033[93mTotal distributed in two rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
+    print(f"\033[93mTotal distributed in two rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
+
+    # Assert that there is truly no non-normalized address
+    non_normalized = [
+        addr for addr in list(total_tokens_combined.keys()) if '0x0' in addr
+    ]
+    if non_normalized:
+        raise ValueError(f"Some addresses are not normalized:\n {non_normalized}")
 
     # save the distribution to a file
     final_json = []
