@@ -182,22 +182,13 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     )
     print(f"\033[93mTotal distributed to core team:\033[0m {sum(core_team.values()):_}")
 
-    def normalize_addresses(distribution: dict) -> dict:
-        dist_keys = list(distribution.keys()) # Here because you can't change keys during iteration over them
-
-        # This loop goes over every key(address) in the dict and creates new key which is the normalized address,
-        # then it pops(which returns and deletes the given key) the value stored under non-normalized adddress
-        for address in dist_keys:
-            distribution[hex(int(address, 0))] = distribution.pop(address)
-
-
     # Normalize the addresses before summing up so that no values are lost
-    normalize_addresses(traders_total)
-    normalize_addresses(stakers_total)
-    normalize_addresses(community_projects)
-    normalize_addresses(activity_allocation)
-    normalize_addresses(core_team)
-
+    traders_total = {hex(int(key, 0)): value for key, value in traders_total.items()}
+    stakers_total = {hex(int(key, 0)): value for key, value in stakers_total.items()}
+    community_projects = {hex(int(key, 0)): value for key, value in traders_total.items()}
+    activity_allocation = {hex(int(key, 0)): value for key, value in activity_allocation.items()}
+    core_team = {hex(int(key, 0)): value for key, value in core_team.items()}
+    
     # sum everything
     total_tokens = {
         k: traders_total.get(k, 0) + 
