@@ -92,7 +92,7 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
         '0x055E0e6BbB31B295f9c11bDe85Fc1fB425bF1e1A86497dF4364AD862697705C9' : 2_000, # Puddington
         '0x07d5851e60a1Ea9BcA3868070eB34C65395c43eD5cF4b96be0310853994184b1' : 500,   # panda840z
         '0x066463F57b5DE66dF56cf4774e5C6784e70Bbe9b333E9F1339D564A691459193' : 500,   # Buduhun7
-        # '0xygenXT ====== MISSING MAINNET ADDRESS ================          ' : 500,   # 0xygenXT FIXME: Missing address
+        '0x031ac74fe11e3e083513671ebc4f98fac55fe045c0b7229cc74c8a1ae96f1273' : 500,   # 0xygenXT 
 
         # Community Devs 
         '0x486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb': 15_000, # Dev 1
