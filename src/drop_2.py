@@ -79,44 +79,41 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     community_projects = {
         # Mods - 7_500 of these goes from "Marek's discretion" and some numbers are high, because 
         # not everything was distributed during previous airdrop
-        '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500, # Cryptowild
-        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 3_000, # PoolCleaner
-        '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 10_500,# JioJiu
-        '0x006a0f490289fe04ea6ba158ed5fd3339628832432d7bc802941664843bc904f' : 4_500, # Black Kisat
-        '0x04d3E6A312d4089Ac798Ae3Cf5766AdB1c1863E23222B5602F19682E08DB2Bd1' : 4_500, # Deliricee
-        '0x0508350Eef9c741692cFb2882B7c0d6E2639C589c667ee0b10E08A2Ab7f256f5' : 6_000, # JiraYa_Og
-        '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC' : 1_500, # Okinawa
+        '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500, 
+        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 3_000, 
+        '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 10_500,
+        '0x006a0f490289fe04ea6ba158ed5fd3339628832432d7bc802941664843bc904f' : 4_500, 
+        '0x04d3E6A312d4089Ac798Ae3Cf5766AdB1c1863E23222B5602F19682E08DB2Bd1' : 4_500, 
+        '0x0508350Eef9c741692cFb2882B7c0d6E2639C589c667ee0b10E08A2Ab7f256f5' : 6_000, 
+        '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC' : 1_500, 
 
         # Marek's discretion
-        '0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f' : 3_000, # Alexandr
-        '0x055E0e6BbB31B295f9c11bDe85Fc1fB425bF1e1A86497dF4364AD862697705C9' : 2_000, # Puddington
-        '0x07d5851e60a1Ea9BcA3868070eB34C65395c43eD5cF4b96be0310853994184b1' : 500,   # panda840z
-        '0x066463F57b5DE66dF56cf4774e5C6784e70Bbe9b333E9F1339D564A691459193' : 500,   # Buduhun7
-        '0x031ac74fe11e3e083513671ebc4f98fac55fe045c0b7229cc74c8a1ae96f1273' : 500,   # 0xygenXT 
+        '0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f' : 3_000, 
+        '0x055E0e6BbB31B295f9c11bDe85Fc1fB425bF1e1A86497dF4364AD862697705C9' : 2_000, 
+        '0x07d5851e60a1Ea9BcA3868070eB34C65395c43eD5cF4b96be0310853994184b1' : 500,   
+        '0x066463F57b5DE66dF56cf4774e5C6784e70Bbe9b333E9F1339D564A691459193' : 500,   
+        '0x031ac74fe11e3e083513671ebc4f98fac55fe045c0b7229cc74c8a1ae96f1273' : 500,   
 
         # Community Devs 
-        '0x486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb': 15_000, # Dev 1
-        '0x365421f66a3fb7630ac030fb83a1db5078bfe29cc22f27f95a9978ff9ab7b6e': 15_000, # Dev 2
+        '0x486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb' : 15_000, 
+        '0x365421f66a3fb7630ac030fb83a1db5078bfe29cc22f27f95a9978ff9ab7b6e' : 15_000, 
     }
 
     activity_allocation = {
         # Tokens that were supposed to be distributed in previous airdrop but weren't
-        '0x7657EEb175A5d3B51c5abFa2cd73B367da8F0Ebc4b3a7c1804F77e8b30b1ff4' : 5970.1492537313439, # Some rando
-        '0x6E7B39f21c1A73A2a266A2A60Ac7FDA4AFE6EbE575bA489c87F68A419EdcA81' : 1492.5373134328356, # Some rando
-        '0x27495304ed75F5257EC68e053e13B4B842Ec9AE65b4720e2EE88b31ecC37A71' : 2238.805970149254   # Some rando
+        '0x7657EEb175A5d3B51c5abFa2cd73B367da8F0Ebc4b3a7c1804F77e8b30b1ff4' : 5970.1492537313439,
+        '0x6E7B39f21c1A73A2a266A2A60Ac7FDA4AFE6EbE575bA489c87F68A419EdcA81' : 1492.5373134328356,
+        '0x27495304ed75F5257EC68e053e13B4B842Ec9AE65b4720e2EE88b31ecC37A71' : 2238.805970149254  
     }
 
     core_team = {
         # Core core
-        '0x0011d341c6e841426448ff39aa443a6dbb428914e05ba2259463c18308b86233' : 100_000,# Marek
-        '0x0583a9d956d65628f806386ab5b12dccd74236a3c6b930ded9cf3c54efc722a1' : 40_000, # Ondra
-        '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad' : 30_000, # David
-        '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af' : 30_000, # Andrej
-        '0x06fd0529AC6d4515dA8E5f7B093e29ac0A546a42FB36C695c8f9D13c5f787f82' : 55_000, # Katsu
-        # Note: Philip doesn't get anything this round as he received a lot previously
-
-        # Core not so core
-        '0x2af7135154dc27d9311b79c57ccc7b3a6ed74efd0c2b81116e8eb49dbf6aaf8'  : 83_333, # UX/UI Guy
+        '0x0011d341c6e841426448ff39aa443a6dbb428914e05ba2259463c18308b86233' : 100_000,
+        '0x0583a9d956d65628f806386ab5b12dccd74236a3c6b930ded9cf3c54efc722a1' : 40_000, 
+        '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad' : 30_000, 
+        '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af' : 30_000, 
+        '0x06fd0529AC6d4515dA8E5f7B093e29ac0A546a42FB36C695c8f9D13c5f787f82' : 55_000, 
+        '0x2af7135154dc27d9311b79c57ccc7b3a6ed74efd0c2b81116e8eb49dbf6aaf8'  : 83_333,
     }
 
 
@@ -142,7 +139,7 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     week_6_start = week_5_start + 7 * 24 * 3600
     week_7_start = week_6_start + 7 * 24 * 3600
     week_8_start = week_7_start + 7 * 24 * 3600
-    week_8_end = week_8_start + 7 * 24 * 3600
+    week_8_end = week_8_start + 7 * 24 * 3600 # Mon Jun 06 2023 00:00:00 GMT+0000
 
     # There are 78 125 tokens distributed each week. The function takes half (39 062.5) of
     # it as an argument, because it distributes the passed value in call and put pool separately,
@@ -217,7 +214,6 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
         for address, tokens in total_tokens.items()
     }
 
-
     # Uncomment this part to save prelims to csv
     # res_df = pd.DataFrame({'address': second_dist.keys(), 'tokens': second_dist.values()})
     # res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 11 ** 18)
@@ -227,12 +223,12 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
     # Load first distribution
     with open('first_distribution_calculated.json', 'r') as infile:
         first_dist = {
-            x['address']: int(x['amount']) for x in json.load(infile)
+            x['address']: x['amount'] for x in json.load(infile)
         }
 
     # Combine current airdrop with previous
     total_tokens_combined = {
-        k: first_dist.get(k, 0) + int(second_dist.get(k, 0))
+        k: int(first_dist.get(k, 0)) + int(second_dist.get(k, 0))
         for k in set(first_dist) | set(second_dist)
     }
     print(f"\033[93mTotal distributed in two rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
