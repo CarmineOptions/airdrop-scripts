@@ -152,7 +152,7 @@ def get_token_distribution_week_5_8() -> Dict[str, int]:
 
     # Uncomment this part to save prelims to csv
     # res_df = pd.DataFrame({'address': second_dist.keys(), 'tokens': second_dist.values()})
-    # res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 11 ** 18)
+    # res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
     # res_df = res_df.sort_values('tokens', ascending = False)
     # res_df.to_csv("prelim_round_2.csv", index = False)
 
