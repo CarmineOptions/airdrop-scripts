@@ -12,7 +12,9 @@ from liq_based import get_liquidity_providers_drop
 
 # Community Projects
     # Marek's Discretion
-    # 0x047991fc342a58b8446c7265b1657aa169ce0323b275dab0a06c8961bf481b37 - 5_000 Carms - reported oracle bug
+    # 0x047991fc342a58b8446c7265b1657aa169ce0323b275dab0a06c8961bf481b37 - 5_000 Carms - reported oracle bug FIXME: Only next month
+        # - text him a message
+    # Ambasadors 8_000 x 2 - Chessse, Fabiocatalao.stark   
 
     # Mods - 15_000
     # ???
@@ -20,13 +22,16 @@ from liq_based import get_liquidity_providers_drop
     # Community Devs - 30_000
     # '0x486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb' : 15_000, 
     # '0x365421f66a3fb7630ac030fb83a1db5078bfe29cc22f27f95a9978ff9ab7b6e' : 15_000, 
-    
-    # Alternative FE - 30_000 ???
+
+
+    # Alternative FE - 30_000 Not done - Nothing now
 
 # Activity Allocation
     # Voting in Proposals - 25_000
 
 # Core - half of what community gets
+#   - dont forget guillermo
+#   - table in excel
 
 def get_token_distribution_week_9_12() -> Dict[str, int]:
 
@@ -77,6 +82,3 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
         k: stakers_1.get(k, 0) + stakers_2.get(k, 0) + stakers_3.get(k, 0) + stakers_4.get(k, 0)
         for k in set(stakers_1) | set(stakers_2) | set(stakers_3) | set(stakers_4)
     }
-    
-
-
