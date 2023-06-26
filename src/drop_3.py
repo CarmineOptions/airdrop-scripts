@@ -7,14 +7,14 @@ import pandas as pd
 from trade_based import get_traders_drop
 from liq_based import get_liquidity_providers_drop
 
-# Traders - 312 500 - 78_125/week
-# Stakers - 312 500 - 78_125/week
+# Traders - 312 500 - 78_125/week - FIXME: - Lower (ad discord)
+# Stakers - 312 500 - 78_125/week - FIXME: - Lower (ad discord)
 
 # Community Projects
     # Marek's Discretion
-    # 0x047991fc342a58b8446c7265b1657aa169ce0323b275dab0a06c8961bf481b37 - 5_000 Carms - reported oracle bug FIXME: Only next month
+    # 0x047991fc342a58b8446c7265b1657aa169ce0323b275dab0a06c8961bf481b37 - 5_000 Carms - reported bug FIXME: Only next monthb
         # - text him a message
-    # Ambasadors 8_000 x 2 - Chessse, Fabiocatalao.stark   
+    # Ambasadors 8_000 x 2 - Chessse, Fabiocatalao.stark
 
     # Mods - 15_000
     # ???
@@ -50,7 +50,8 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
         '0x02af7135154dc27d9311b79c57ccc7b3a6ed74efd0c2b81116e8eb49dbf6aaf8',
         '0x2af7135154dc27d9311b79c57ccc7b3a6ed74efd0c2b81116e8eb49dbf6aaf8',
         '0x06fd0529ac6d4515da8e5f7b093e29ac0a546a42fb36c695c8f9d13c5f787f82',
-        '0x6fd0529ac6d4515da8e5f7b093e29ac0a546a42fb36c695c8f9d13c5f787f82' 
+        '0x6fd0529ac6d4515da8e5f7b093e29ac0a546a42fb36c695c8f9d13c5f787f82',
+        # FIXME: Add Guillermo
     }
 
     week_9_start = 1685923200 # Mon Jun 05 2023 00:00:00 GMT+0000
