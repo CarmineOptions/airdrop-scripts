@@ -37,11 +37,13 @@ def get_liquidity_providers_drop(
     )
     df = df.sort_values('timestamp')
 
-    # Remove any entries from core team wallets
-    df = df[~df['caller'].isin(core_team_addresses)]
-
     # Standardize addresses
     df['caller'] = df.caller.map(lambda x: hex(int(x, 0)))
+
+    # Remove any entries from core team wallets
+    # But first normalize core_team_addresses as well
+    core_team_addresses = {hex(int(x, 0)) for x in core_team_addresses}
+    df = df[~df['caller'].isin(core_team_addresses)]
 
     # Separate data into call and put pool
     call_pool = df[df['liquidity_pool'] == "Call"].copy().reset_index(drop = True)
