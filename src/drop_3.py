@@ -161,10 +161,10 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
 
 
     # Uncomment this part to save prelims to csv
-    # res_df = pd.DataFrame({'address': third_dist.keys(), 'tokens': third_dist.values()})
-    # res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
-    # res_df = res_df.sort_values('tokens', ascending = False)
-    # res_df.to_csv("prelim_round_3.csv", index = False)
+    res_df = pd.DataFrame({'address': third_dist.keys(), 'tokens': third_dist.values()})
+    res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
+    res_df = res_df.sort_values('tokens', ascending = False)
+    res_df.to_csv("prelim_round_3.csv", index = False)
     
     # Load second distribution
     with open('second_distribution_calculated.json', 'r') as infile:
@@ -189,9 +189,10 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
         raise ValueError(f"Some addresses are not normalized:\n {non_normalized}")
 
 
-    final_json = []
-    for address, val in total_tokens_combined.items():
-        final_json.append({'address': address, 'amount': val})
+    final_json = [
+        {'address': address, 'amount': val}
+        for address, val in total_tokens_combined.items()
+    ]
 
     open('third_distribution_calculated.json', 'w+').write(json.dumps(final_json))
 
