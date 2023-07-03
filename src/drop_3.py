@@ -20,13 +20,13 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
     # Community Projects
     community_projects = {
         # Marek's Discretion
-        # Ambassadors - 16_000
+        # Ambassadors - 20_500
         '0x030c3f654Ead1da0c9166d483d3dd436dcbB57Ce8E1AdaA129995103A8dcCA4D': 8_000, 
         '0x01fb62ac54f9fa99e1417f83bcb88485556427397f717ed4e7233bc99be31bff': 8_000, 
         '0x037080eb7d9ff1f71c143fa5ea125850756439af288982f828230835482708f9': 1_500, 
         '0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f': 3_000, 
 
-        # Mods - 1500 each  
+        # Mods - 1500 each - 10 500 total
         '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500,
         '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 1_500,
         '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 1_500,
