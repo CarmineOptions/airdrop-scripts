@@ -21,33 +21,32 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
     community_projects = {
         # Marek's Discretion
         # Ambassadors - 16_000
-        '0x030c3f654Ead1da0c9166d483d3dd436dcbB57Ce8E1AdaA129995103A8dcCA4D': 8_000, # Chesse
-        '0x01fb62ac54f9fa99e1417f83bcb88485556427397f717ed4e7233bc99be31bff': 8_000, # Fabi
-        '0x037080eb7d9ff1f71c143fa5ea125850756439af288982f828230835482708f9': 1_500, # Rugar
-        '0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f': 3_000, # Guy from Ticket 0275 TODO: Confirm address
+        '0x030c3f654Ead1da0c9166d483d3dd436dcbB57Ce8E1AdaA129995103A8dcCA4D': 8_000, 
+        '0x01fb62ac54f9fa99e1417f83bcb88485556427397f717ed4e7233bc99be31bff': 8_000, 
+        '0x037080eb7d9ff1f71c143fa5ea125850756439af288982f828230835482708f9': 1_500, 
+        '0x068C8E344aBF736892a97daC9a3daF2952A047b769E085D7557901Ddf31a435f': 3_000, 
 
         # Mods - 1500 each  
-        '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500, # CryptoWild
-        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 1_500, # PoolCleaner
-        '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 1_500, # JioJiu
-        '0x006a0f490289fe04ea6ba158ed5fd3339628832432d7bc802941664843bc904f' : 1_500, # BlackKisar
-        '0x04d3E6A312d4089Ac798Ae3Cf5766AdB1c1863E23222B5602F19682E08DB2Bd1' : 1_500, # Deliricee
-        '0x0508350Eef9c741692cFb2882B7c0d6E2639C589c667ee0b10E08A2Ab7f256f5' : 1_500, # JiRaYa
-        '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC' : 1_500, # Okinawa
+        '0x04d2FE1Ff7c0181a4F473dCd982402D456385BAE3a0fc38C49C0A99A620d1abe' : 1_500,
+        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45' : 1_500,
+        '0x0639f7ad800fcbe2ad56e3b000f9a0581759cce989b3ee09477055c0816a12c7' : 1_500,
+        '0x006a0f490289fe04ea6ba158ed5fd3339628832432d7bc802941664843bc904f' : 1_500,
+        '0x04d3E6A312d4089Ac798Ae3Cf5766AdB1c1863E23222B5602F19682E08DB2Bd1' : 1_500,
+        '0x0508350Eef9c741692cFb2882B7c0d6E2639C589c667ee0b10E08A2Ab7f256f5' : 1_500,
+        '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC' : 1_500,
 
         # Community devs - 30_000
         '0x486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb' : 15_000, 
         '0x365421f66a3fb7630ac030fb83a1db5078bfe29cc22f27f95a9978ff9ab7b6e' : 15_000, 
     }
 
-    # Core - half of what community gets
+    # Core Team
     core_team = {
-        '0x0011d341c6e841426448ff39aa443a6dbb428914e05ba2259463c18308b86233' : 100_000, # Marek
-        '0x0583a9d956d65628f806386ab5b12dccd74236a3c6b930ded9cf3c54efc722a1' : 40_000,  # Ondra
-        '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad' : 30_000,  # David
-        '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af' : 30_000,  # Andrej
-        '0x06fd0529AC6d4515dA8E5f7B093e29ac0A546a42FB36C695c8f9D13c5f787f82' : 5_000,   # Dincer
-        # TODO: Add Guillermo
+        '0x0011d341c6e841426448ff39aa443a6dbb428914e05ba2259463c18308b86233' : 100_000,
+        '0x0583a9d956d65628f806386ab5b12dccd74236a3c6b930ded9cf3c54efc722a1' : 40_000, 
+        '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad' : 30_000, 
+        '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af' : 30_000, 
+        '0x06fd0529AC6d4515dA8E5f7B093e29ac0A546a42FB36C695c8f9D13c5f787f82' : 5_000,  
     }
 
     core_team_addresses = { 
@@ -66,7 +65,6 @@ def get_token_distribution_week_9_12() -> Dict[str, int]:
         '0x2af7135154dc27d9311b79c57ccc7b3a6ed74efd0c2b81116e8eb49dbf6aaf8',
         '0x06fd0529ac6d4515da8e5f7b093e29ac0a546a42fb36c695c8f9d13c5f787f82',
         '0x6fd0529ac6d4515da8e5f7b093e29ac0a546a42fb36c695c8f9d13c5f787f82',
-        # TODO: Add Guillermo
     }
 
     # Activity Allocation
