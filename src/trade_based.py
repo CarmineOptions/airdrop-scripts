@@ -52,11 +52,13 @@ def get_traders_drop(
     # Calculate premia
     df['premium'] = df.apply(calc_premium, axis = 1)
 
-    # Remove any entries from core team wallets
-    df = df[~df.caller.isin(core_team_addresses)]
-
     # Standardize addresses
     df['caller'] = df.caller.map(lambda x: hex(int(x, 0)))
+
+    # Remove any entries from core team wallets
+    # But first normalize core_team_addresses as well
+    core_team_addresses = {hex(int(x, 0)) for x in core_team_addresses}
+    df = df[~df.caller.isin(core_team_addresses)]
 
     # Separate data into call and put options
     call_distribution = df[df['option_type'] == 0]
