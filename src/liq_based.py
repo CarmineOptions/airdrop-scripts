@@ -46,8 +46,8 @@ def get_liquidity_providers_drop(
     df = df[~df['caller'].isin(core_team_addresses)]
 
     # Separate data into call and put pool
-    call_pool = df[df['liquidity_pool'] == "Call"].copy().reset_index(drop = True)
-    put_pool = df[df['liquidity_pool'] == "Put"].copy().reset_index(drop = True)
+    call_pool = df[df['liquidity_pool'] == "ETH/USDC Call"].copy().reset_index(drop = True)
+    put_pool = df[df['liquidity_pool'] == "ETH/USDC Put"].copy().reset_index(drop = True)
 
     # Function for calculating token share
     def get_token_share(
@@ -58,7 +58,7 @@ def get_liquidity_providers_drop(
             is_first_week: bool 
     ) -> pd.DataFrame:
         res = []
-
+        
         # Iterate over unique callers
         for user in df['caller'].unique():
             tmp = df[df['caller'] == user].copy()
@@ -95,7 +95,6 @@ def get_liquidity_providers_drop(
                 res.append(
                     {'caller': user, 'min_minted_cum': tmp['minted_cum'].min()}
                 )
-
 
         res = pd.DataFrame(res).sort_values('min_minted_cum', ascending = False).reset_index(drop = True)
         
