@@ -1,3 +1,5 @@
+import decimal
+import json
 from typing import Dict, Any
 import os
 import re
@@ -57,11 +59,10 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         "Galxe flippening": 20_000
     }
 
-    # Lead ambassadors, ambassadors, moderators
-    ambassadors= {
+    # Lead ambassadors, ambassadors, moderators  # TODO lead ambassadors
+    ambassadors = {
         "f": distribution_model['Ambassadors1'],
         "c": distribution_model['Ambassadors2'],
-        "moderator": distribution_model[]
     }
     ambassadors_norm = normalize_addresses_in_map(ambassadors)
 
@@ -78,17 +79,30 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     }
     investors_norm = normalize_addresses_in_map(investors)
 
-    KOL = {}
-    zealy_users = {}
-    galxe_users = {}
-    gitcoin_contributors = {}
-    poolcleaners = {}
+    # TODO
+    KOL_norm = {}
+    zealy_users_norm = {}
+    galxe_users_norm = {}
+    gitcoin_contributors_norm = {}
+    poolcleaners_norm = {}
+    SKY_norm = {}
 
 
     # Core Team
-    core_team = {
-        "0x00d79a15d84f5820310db21f953a0fae92c95e25d93cb983cc0c27fc4c52273c": 7001443
-        # TODO add all
+    core_team = {  # TODO add missing addresses
+        '0x00d79a15d84f5820310db21f953a0fae92c95e25d93cb983cc0c27fc4c52273c': 7_001_443,
+        'm': 112_360,
+        '0x06e2c2a5da2e5478b1103d452486afba8378e91f32a124f0712f09edd3ccd923': 2_774_035,
+        'd': 1_818_602,
+        '0x062c290f0afa1ea2d6b6d11f6f8ffb8e626f796e13be1cf09b84b2edaa083472': 116_389,
+        '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af': 1_664_844,
+        '0x07fce7a88b861dfea6af35d16cd60f4ea3bba98dc7b596d4ca529b6c182fd3fd': 417_600,
+        'p': 111_385,
+        'g': 128_943,
+        '0x05105649f42252f79109356e1c8765b7dcdb9bf4a6a68534e7fc962421c7efd2': 210_101,
+        '0x06c59d2244250f2540a2694472e3c31262e887ff02582ef864bf0e76c34e1298': 57_795,
+        '0x0528f064c43e2d6Ee73bCbfB725bAa293CD31Ea1f1861EA2F80Bc283Ea4Ad728': 120_614,
+        '0x00777558f1c767126461540d1f10118981d30bd620707e99686bfc9f00ae66f0': 4_123
     }
     core_team_norm = normalize_addresses_in_map(core_team)
 
@@ -168,78 +182,82 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         address: token_per_og_contributor for address in og_user_addresses
     }
 
+    all_contributor_maps = [
+        core_team_norm,
+        ambassadors_norm,
+        moderators_norm,
+        investors_norm,
+        user_points_norm,
+        konoha_contributors_norm,
+        derisk_contributors_norm,
+        og_contributors_norm,
+        testnet_contributors_norm,
+        user_points_norm,
+        # TODO check if following maps are filled
+        KOL_norm,
+        zealy_users_norm,
+        galxe_users_norm,
+        gitcoin_contributors_norm,
+        poolcleaners_norm,
+        SKY_norm
+    ]
 
-    # # Normalize the addresses before summing up so that no values are lost
-    # traders_total       = {hex(int(key, 0)): value for key, value in traders_total.items()}
-    # stakers_total       = {hex(int(key, 0)): value for key, value in stakers_total.items()}
-    # community_projects  = {hex(int(key, 0)): value for key, value in community_projects.items()}
-    # activity_allocation = {hex(int(key, 0)): value for key, value in activity_allocation.items()}
-    # core_team           = {hex(int(key, 0)): value for key, value in core_team.items()}
-    #
+    all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
     total_tokens = {
-        k: traders_total.get(k, 0) +
-           stakers_total.get(k, 0) +
-           activity_allocation.get(k, 0) +
-           community_projects.get(k, 0) +
-           core_team.get(k, 0)
-        for k in set(traders_total) | set(stakers_total) | set(activity_allocation) | set(community_projects) | set(core_team)
+        k: sum([
+            contributors_map.get(k, 0) for contributors_map in all_contributor_maps
+        ])
+        for k in all_contributor_addresses
     }
     # print(f"\033[93mTotal distributed in third round:\033[0m {sum(total_tokens.values()):_}")
     #
-    # # Round down the tokens
-    # def _adjust_tokens_number(tokens: float) -> str:
-    #     raw_number_of_tokens = decimal.Decimal(str(tokens)) * decimal.Decimal(10**18)
-    #     rounded_number_of_tokens = raw_number_of_tokens.quantize(
-    #         decimal.Decimal('1.'),
-    #         rounding=decimal.ROUND_DOWN
-    #     )
-    #     return rounded_number_of_tokens.to_eng_string()
-    #
-    #
-    # # https://github.com/CarmineOptions/carmine-api/blob/master/carmine-api-airdrop/src/air-drop.json
-    # # template for the json
-    # third_dist = {
-    #     address: _adjust_tokens_number(tokens)
-    #     for address, tokens in total_tokens.items()
-    # }
-    #
-    #
-    # # Uncomment this part to save prelims to csv
-    # res_df = pd.DataFrame({'address': third_dist.keys(), 'tokens': third_dist.values()})
-    # res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
-    # res_df = res_df.sort_values('tokens', ascending = False)
-    # res_df.to_csv("prelim_round_4.csv", index = False)
-    #
-    # # Load second distribution
-    # with open('second_distribution_calculated.json', 'r') as infile:
-    #     fourth_dist = {
-    #         x['address']: x['amount'] for x in json.load(infile)
-    #     }
-    #
-    #
-    # # Combine current airdrop with previous
-    # total_tokens_combined = {
-    #     k: int(second_dist.get(k, 0)) + int(third_dist.get(k, 0)) + int(fourth_dist.get(k, 0))
-    #     for k in set(second_dist) | set(third_dist) | set(fourth_dist)
-    # }
-    # print(f"\033[93mTotal distributed in three rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
-    #
-    #
-    # # Assert that there is truly no non-normalized address
-    # non_normalized = [
-    #     addr for addr in list(total_tokens_combined.keys()) if '0x0' in addr
-    # ]
-    # if non_normalized:
-    #     raise ValueError(f"Some addresses are not normalized:\n {non_normalized}")
-    #
-    #
-    # final_json = [
-    #     {'address': address, 'amount': val}
-    #     for address, val in total_tokens_combined.items()
-    # ]
-    #
-    # open('third_distribution_calculated.json', 'w+').write(json.dumps(final_json))
+    # Round down the tokens
+    def _adjust_tokens_number(tokens: float) -> str:
+        raw_number_of_tokens = decimal.Decimal(str(tokens)) * decimal.Decimal(10**18)
+        rounded_number_of_tokens = raw_number_of_tokens.quantize(
+            decimal.Decimal('1.'),
+            rounding=decimal.ROUND_DOWN
+        )
+        return rounded_number_of_tokens.to_eng_string()
+
+    fourth_dist = {
+        address: _adjust_tokens_number(tokens)
+        for address, tokens in total_tokens.items()
+    }
+
+    # Uncomment this part to save prelims to csv
+    res_df = pd.DataFrame({'address': fourth_dist.keys(), 'tokens': fourth_dist.values()})
+    res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
+    res_df = res_df.sort_values('tokens', ascending = False)
+    res_df.to_csv("prelim_round_4.csv", index = False)
+
+    # Load second distribution
+    with open('third_distribution_calculated.json', 'r') as infile:
+        third_dist = {
+            x['address']: x['amount'] for x in json.load(infile)
+        }
+
+
+    # Combine current airdrop with previous
+    total_tokens_combined = {
+        int(third_dist.get(k, 0)) + int(fourth_dist.get(k, 0))
+        for k in set(third_dist) | set(fourth_dist)
+    }
+    print(f"\033[93mTotal distributed in four rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
+
+    # Assert that there is truly no non-normalized address
+    non_normalized = [
+        addr for addr in list(total_tokens_combined.keys()) if '0x0' in addr
+    ]
+    if non_normalized:
+        raise ValueError(f"Some addresses are not normalized:\n {non_normalized}")
+
+    final_json = [
+        {'address': address, 'amount': val}
+        for address, val in total_tokens_combined.items()
+    ]
+    open('fourth_distribution_calculated.json', 'w+').write(json.dumps(final_json))
 
 
 if __name__ == '__main__':
