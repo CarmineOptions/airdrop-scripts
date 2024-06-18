@@ -1,7 +1,6 @@
 import decimal
 import json
 from typing import Dict, Any
-import os
 import re
 
 import pandas as pd
@@ -12,9 +11,9 @@ VOTE_MULTIPLIER = 1
 LIQUIDITY_MULTIPLIER = 1
 TRADING_MULTIPLIER = 1
 
-USER_POINTS_FILE_PATH = '../user_POINTS.csv'
-OG_USERS_FILE_PATH = '../og-users.txt'
-TESTNET_USERS_FILE_PATH = '../testnet-users.txt'
+USER_POINTS_FILE_PATH = 'src/allocation_four_docs/user_POINTS.csv'
+OG_USERS_FILE_PATH = 'src/allocation_four_docs/og-users.txt'
+TESTNET_USERS_FILE_PATH = 'src/allocation_four_docs/testnet-users.txt'
 
 
 def extract_starknet_addresses(file_path):
@@ -32,7 +31,10 @@ def extract_starknet_addresses(file_path):
 
 
 def normalize_sn_address(address: str) -> str:
-    return hex(int(address, 0))
+    try:
+        return hex(int(address, 0))
+    except ValueError:  # TODO remove this
+        return address
 
 
 def normalize_addresses_in_map(address_map: Dict[str, Any]) -> Dict[str, Any]:
@@ -43,10 +45,11 @@ def normalize_addresses_in_map(address_map: Dict[str, Any]) -> Dict[str, Any]:
 
 def get_token_distribution_round_4() -> Dict[str, int]:
     distribution_model = {
+        "allocated for points": 8_000_000,
         "Specific users": 20_000,
-        "Lead Ambassadors": None,
+        "Lead Ambassadors": 0,  # TODO ADD number
         "Ambassadors1": 500_000,
-        "Ambassadors2": None,
+        "Ambassadors2": 0,  # TODO ADD number
         "Carmine watch (Moderators)": 200_000,
         "Community devs (DeRisk)": 200_000,
         "Community devs (Konoha)": 200_000,
@@ -66,7 +69,9 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     }
     ambassadors_norm = normalize_addresses_in_map(ambassadors)
 
-    moderator_addresses = []  # TODO add addresses
+    moderator_addresses = [
+        'mod1'
+    ]  # TODO add addresses
     moderator_addresses = {normalize_sn_address(address) for address in moderator_addresses}
     total_tokens_allocated_mods = distribution_model["Carmine watch (Moderators)"]
     allocation_per_mod = total_tokens_allocated_mods / len(moderator_addresses)
@@ -74,7 +79,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
 
     # investors
     investors = {
-        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': None,
+        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': 0,  # TODO ADD number
         # TODO add 3 more, add number above
     }
     investors_norm = normalize_addresses_in_map(investors)
@@ -113,9 +118,11 @@ def get_token_distribution_round_4() -> Dict[str, int]:
             + x.referral_points * REFERRAL_MULTIPLIER + x.vote_points * VOTE_MULTIPLIER
     ), axis=1)
     user_points.user_address = user_points.user_address.apply(lambda x: normalize_sn_address(x))
+    tokens_per_point = distribution_model["allocated for points"]/user_points.user_points_total.sum()
+    user_points['user_tokens'] = user_points.user_points_total * tokens_per_point
 
     assert len(user_points.user_address.unique()) == user_points.shape[0], "Addresses for timestamp are not unique"
-    user_points_norm = {row.user_address: row.user_points_total for _, row in user_points.iterrows()}
+    user_points_norm = {row.user_address: row.user_tokens for _, row in user_points.iterrows()}
 
     # f.s.users
     fsusers = {
@@ -192,7 +199,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         derisk_contributors_norm,
         og_contributors_norm,
         testnet_contributors_norm,
-        user_points_norm,
+        fsusers_norm,
         # TODO check if following maps are filled
         KOL_norm,
         zealy_users_norm,
@@ -201,7 +208,6 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         poolcleaners_norm,
         SKY_norm
     ]
-
     all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
     total_tokens = {
@@ -210,11 +216,11 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         ])
         for k in all_contributor_addresses
     }
-    # print(f"\033[93mTotal distributed in third round:\033[0m {sum(total_tokens.values()):_}")
-    #
+    print(f"\033[93mTotal distributed in 4th round:\033[0m {sum(total_tokens.values()):_}")
+
     # Round down the tokens
     def _adjust_tokens_number(tokens: float) -> str:
-        raw_number_of_tokens = decimal.Decimal(str(tokens)) * decimal.Decimal(10**18)
+        raw_number_of_tokens = decimal.Decimal(str(tokens)) * decimal.Decimal(10 ** 18)
         rounded_number_of_tokens = raw_number_of_tokens.quantize(
             decimal.Decimal('1.'),
             rounding=decimal.ROUND_DOWN
@@ -238,10 +244,9 @@ def get_token_distribution_round_4() -> Dict[str, int]:
             x['address']: x['amount'] for x in json.load(infile)
         }
 
-
     # Combine current airdrop with previous
     total_tokens_combined = {
-        int(third_dist.get(k, 0)) + int(fourth_dist.get(k, 0))
+        k: int(third_dist.get(k, 0)) + int(fourth_dist.get(k, 0))
         for k in set(third_dist) | set(fourth_dist)
     }
     print(f"\033[93mTotal distributed in four rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
