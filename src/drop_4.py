@@ -14,6 +14,7 @@ TRADING_MULTIPLIER = 1
 USER_POINTS_FILE_PATH = 'src/allocation_four_docs/user_POINTS.csv'
 OG_USERS_FILE_PATH = 'src/allocation_four_docs/og-users.txt'
 TESTNET_USERS_FILE_PATH = 'src/allocation_four_docs/testnet-users.txt'
+TOKENS_PER_TESTNET_CONTRIBUTOR = 20.0
 
 
 def extract_starknet_addresses(file_path):
@@ -69,8 +70,14 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     }
     ambassadors_norm = normalize_addresses_in_map(ambassadors)
 
+    lead_ambassadors = {
+        # TODO add later
+    }
+
     moderator_addresses = [
-        'mod1'
+        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45',
+        '0x0639F7aD800Fcbe2aD56E3b000f9A0581759CcE989b3Ee09477055c0816A12c7'
+        #  TODO check addresses after M. review
     ]  # TODO add addresses
     moderator_addresses = {normalize_sn_address(address) for address in moderator_addresses}
     total_tokens_allocated_mods = distribution_model["Carmine watch (Moderators)"]
@@ -86,11 +93,9 @@ def get_token_distribution_round_4() -> Dict[str, int]:
 
     # TODO
     KOL_norm = {}
-    zealy_users_norm = {}
-    galxe_users_norm = {}
-    gitcoin_contributors_norm = {}
-    poolcleaners_norm = {}
-    SKY_norm = {}
+    # zealy_users_norm = {}  # we do these 3 later
+    # galxe_users_norm = {}
+    # gitcoin_contributors_norm = {}
 
 
     # Core Team
@@ -102,8 +107,8 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         '0x062c290f0afa1ea2d6b6d11f6f8ffb8e626f796e13be1cf09b84b2edaa083472': 116_389,
         '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af': 1_664_844,
         '0x07fce7a88b861dfea6af35d16cd60f4ea3bba98dc7b596d4ca529b6c182fd3fd': 417_600,
-        'p': 111_385,
-        'g': 128_943,
+        '0x022eb3aDCF35A52Cb39c9F35177176dEDa69Ed323c57D3eC409dd268664D18DF': 111_385,
+        '0x0446e7774b852215e81f09a6ec01b9da92e34a1c64fda5e627d492fd07cb6306': 128_943,
         '0x05105649f42252f79109356e1c8765b7dcdb9bf4a6a68534e7fc962421c7efd2': 210_101,
         '0x06c59d2244250f2540a2694472e3c31262e887ff02582ef864bf0e76c34e1298': 57_795,
         '0x0528f064c43e2d6Ee73bCbfB725bAa293CD31Ea1f1861EA2F80Bc283Ea4Ad728': 120_614,
@@ -176,7 +181,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     # testnet_contributors
     testnet_addresses = extract_starknet_addresses(TESTNET_USERS_FILE_PATH)
     testnet_addresses = {normalize_sn_address(address) for address in testnet_addresses}
-    token_per_testnet_contributor = distribution_model["testnet users"] / len(testnet_addresses)
+    token_per_testnet_contributor = TOKENS_PER_TESTNET_CONTRIBUTOR
     testnet_contributors_norm = {
         address: token_per_testnet_contributor for address in testnet_addresses
     }
@@ -202,11 +207,9 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         fsusers_norm,
         # TODO check if following maps are filled
         KOL_norm,
-        zealy_users_norm,
-        galxe_users_norm,
-        gitcoin_contributors_norm,
-        poolcleaners_norm,
-        SKY_norm
+        # zealy_users_norm,
+        # galxe_users_norm,
+        # gitcoin_contributors_norm,
     ]
     all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
