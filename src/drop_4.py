@@ -259,6 +259,11 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         for address, tokens in total_tokens.items()
     }
 
+    # exclude faulty addresses
+    faulty_addresses = ['0x84e33438bb816f1daec2b70b0ba9da85fddc6e962ccea186d073e9a0f2e56a5b']
+    for address in faulty_addresses:
+        del fourth_dist[address]
+
     # Uncomment this part to save prelims to csv
     res_df = pd.DataFrame({'address': fourth_dist.keys(), 'tokens': fourth_dist.values()})
     res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
