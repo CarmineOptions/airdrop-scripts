@@ -92,7 +92,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     KOL = {
         '0x04e7F967f9b075D309E052f2Ac0d9A2F5a6DcD130BFe6e8906A84b3BE7104529': 16_000,
         '0x07Ba5bA6F3146E5715452339Ec8871bAD3d991686A042dBCEcEdC5a6e103Ae5b': 12_000,
-        # 'vd': 18_000  # next token allocation if provide address.
+        '0x0672E2d7E07A07d9aE1F3E080B7aB6e5aa1B6a30192E021A0F7614ec698e1fEd': 18_000
     }
     KOL_norm = normalize_addresses_in_map(KOL)
 
