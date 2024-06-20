@@ -47,10 +47,10 @@ def normalize_addresses_in_map(address_map: Dict[str, Any]) -> Dict[str, Any]:
 def get_token_distribution_round_4() -> Dict[str, int]:
     distribution_model = {
         "allocated for points": 8_000_000,
-        "Specific users": 20_000,
-        "Lead Ambassadors": 0,  # TODO ADD number
-        "Ambassadors1": 500_000,
-        "Ambassadors2": 0,  # TODO ADD number
+        "Specific users": 20_000,  # not used
+        "Lead Ambassadors": 0,  # not used
+        "Ambassadors1": 600_000,
+        "Ambassadors2": 0,
         "Carmine watch (Moderators)": 200_000,
         "Community devs (DeRisk)": 200_000,
         "Community devs (Konoha)": 200_000,
@@ -63,47 +63,59 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         "Galxe flippening": 20_000
     }
 
-    # Lead ambassadors, ambassadors, moderators  # TODO lead ambassadors
-    ambassadors = {
-        "f": distribution_model['Ambassadors1'],
-        "c": distribution_model['Ambassadors2'],
-    }
-    ambassadors_norm = normalize_addresses_in_map(ambassadors)
-
+    # Lead ambassadors, ambassadors, moderators, investors
     lead_ambassadors = {
-        # TODO add later
+        '0x018D4756921D34b0026731F427C6b365687Ce61CE060141Bf26867f0920D2191': 225_000,
+        '0x01fb62ac54f9fa99e1417f83bcb88485556427397f717ed4e7233bc99be31bff': 225_000,
+        '0x054e0ab67bd384312d640915b55d7e918fe2031269ec26f8fc7fde9abbd1e0a5': 175_000
     }
+    ambassadors_norm = normalize_addresses_in_map(lead_ambassadors)
 
-    moderator_addresses = [
-        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45',
-        '0x0639F7aD800Fcbe2aD56E3b000f9A0581759CcE989b3Ee09477055c0816A12c7'
-        #  TODO check addresses after M. review
-    ]  # TODO add addresses
-    moderator_addresses = {normalize_sn_address(address) for address in moderator_addresses}
-    total_tokens_allocated_mods = distribution_model["Carmine watch (Moderators)"]
-    allocation_per_mod = total_tokens_allocated_mods / len(moderator_addresses)
-    moderators_norm = {address: allocation_per_mod for address in moderator_addresses}
+    moderators = {
+        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45': 87_500,
+        '0x0639F7aD800Fcbe2aD56E3b000f9A0581759CcE989b3Ee09477055c0816A12c7': 70_000,
+        '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC': 52_500
+        # TODO this address in red
+    }
+    moderators_norm = normalize_addresses_in_map(moderators)
+
+    ambassadors_f = {
+        '0x04a8713ab7aff5e97fb1aa7652314a5ed6102b200da75ef42078a5a01fef4093': 89_859,
+        '0x00aa7fe49a402af47bf2bcfee7e356a5ae18db0adedaa2c44a1de60c6ef9caef': 31_525,
+        '0x0558808A3C00c778C93E3d4348687b048613993E6b03836726B5d581f9960515': 101_577,
+        '0x000928e2956ad7138c273120412bf2283d83e985b2426c2b8ddf146fd6b37884': 41_072,
+        '0x02ba1c396a2a3bd5dcc62fe3f9bd9f85eaa6580609bb903ccbb8aad374cf3f76': 74_139,
+        '0x05bb61ab3472556d0151bb4fa22e3514d1a490cb31229b7bcca33744afd5858f': 44_921,
+        '0x046d95a7f86ec19412a4da5d28f6a6addf62f1cd2c5d0defbe18bff1d96a2458': 0,   # TODO confirm
+        '0x049c691d23cf572e3318472dac01d5a6d996470aa1050af0ccadda392c073efb': 64_270,
+        '0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d': 29_201,
+        '0x06Ae3E526C67A3f38393034abAC34E8274A5683c2c4f00D6aeFEa98057daE5Af': 42_903,
+        '0x055f973e925Fba11C9cEA1565ff000f196a7DdfCb73c7292774a8d5408FA6bF4': 43_870,
+        'ak': 36_663  # TODO add address
+    }
+    ambassadors_f_norm = normalize_addresses_in_map(ambassadors_f)
 
     # investors
     investors = {
-        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': 0,  # TODO ADD number
-        # TODO add 3 more, add number above
+        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': 3_000_000,  # TODO doublecheck numbers
+        '0x056d761e1e5d1918dba05de02afdbd8de8da01a63147dce828c9b1fe9227077d': 17_000_000
     }
     investors_norm = normalize_addresses_in_map(investors)
 
-    # TODO
-    KOL_norm = {}
-    # zealy_users_norm = {}  # we do these 3 later
-    # galxe_users_norm = {}
-    # gitcoin_contributors_norm = {}
-
+    # KOL
+    KOL = {
+        '0x04e7F967f9b075D309E052f2Ac0d9A2F5a6DcD130BFe6e8906A84b3BE7104529': 16_000,
+        '0x07Ba5bA6F3146E5715452339Ec8871bAD3d991686A042dBCEcEdC5a6e103Ae5b': 12_000,
+        'vd': 18_000  # TODO add address
+    }
+    KOL_norm = normalize_addresses_in_map(KOL)
 
     # Core Team
-    core_team = {  # TODO add missing addresses
+    core_team = {
         '0x00d79a15d84f5820310db21f953a0fae92c95e25d93cb983cc0c27fc4c52273c': 7_001_443,
-        'm': 112_360,
+        'm': 0,  # TODO wb martin?
         '0x06e2c2a5da2e5478b1103d452486afba8378e91f32a124f0712f09edd3ccd923': 2_774_035,
-        'd': 1_818_602,
+        '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad': 1_818_602,
         '0x062c290f0afa1ea2d6b6d11f6f8ffb8e626f796e13be1cf09b84b2edaa083472': 116_389,
         '0x06717eaf502baac2b6b2c6ee3ac39b34a52e726a73905ed586e757158270a0af': 1_664_844,
         '0x07fce7a88b861dfea6af35d16cd60f4ea3bba98dc7b596d4ca529b6c182fd3fd': 417_600,
@@ -112,11 +124,12 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         '0x05105649f42252f79109356e1c8765b7dcdb9bf4a6a68534e7fc962421c7efd2': 210_101,
         '0x06c59d2244250f2540a2694472e3c31262e887ff02582ef864bf0e76c34e1298': 57_795,
         '0x0528f064c43e2d6Ee73bCbfB725bAa293CD31Ea1f1861EA2F80Bc283Ea4Ad728': 120_614,
-        '0x00777558f1c767126461540d1f10118981d30bd620707e99686bfc9f00ae66f0': 4_123
+        '0x00777558f1c767126461540d1f10118981d30bd620707e99686bfc9f00ae66f0': 4_123,
+        '0x0244dda2c6581eb158db225992153c9d49e92c412424daeb83a773fa9822eeef': 3_352_361  # multisig
     }
     core_team_norm = normalize_addresses_in_map(core_team)
 
-    # user points
+    # user points  # TODO replace source with correct timestamp
     user_points = pd.read_csv(USER_POINTS_FILE_PATH)
     user_points['user_points_total'] = user_points.apply(lambda x: (
             x.trading_points * TRADING_MULTIPLIER + x.liquidity_points * LIQUIDITY_MULTIPLIER
@@ -131,8 +144,9 @@ def get_token_distribution_round_4() -> Dict[str, int]:
 
     # f.s.users
     fsusers = {
-        '0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d': 7500,
-        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45': 12500
+        '0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d': 7_500,
+        '0x04303Ef08A7e078bc867a745aEE5fa9DEf4fAF56643bd933D85C0717042e0CDc': 40_000,
+        '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45': 12_500
     }
     fsusers_norm = normalize_addresses_in_map(fsusers)
 
@@ -169,6 +183,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         '0x0486deba6028c880ce3d1730a4496e4f12d7b813367d43510ea410f5ff7e3efb': 30,
         '0x00a33c61ad75096f4c67449f561cf4d84ef00c318f4c6e163926987cd5befddc': 6,
         '0x075e108742924A335b3F4589ea74aC0C6fF89B61E05Bd72Cb244CEcCeEF42550': 4,
+        '0x0365421f66a3fb7630ac030fb83a1db5078bfe29cc22f27f95a9978ff9ab7b6e': 30
     }
 
     total_days = sum(konoha_contributor_days.values())
@@ -198,6 +213,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         core_team_norm,
         ambassadors_norm,
         moderators_norm,
+        ambassadors_f_norm,
         investors_norm,
         user_points_norm,
         konoha_contributors_norm,
@@ -205,7 +221,6 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         og_contributors_norm,
         testnet_contributors_norm,
         fsusers_norm,
-        # TODO check if following maps are filled
         KOL_norm,
         # zealy_users_norm,
         # galxe_users_norm,
