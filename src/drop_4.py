@@ -14,7 +14,8 @@ TRADING_MULTIPLIER = 1
 USER_POINTS_FILE_PATH = 'src/allocation_four_docs/user_POINTS.csv'
 OG_USERS_FILE_PATH = 'src/allocation_four_docs/og-users.txt'
 TESTNET_USERS_FILE_PATH = 'src/allocation_four_docs/testnet-users.txt'
-TOKENS_PER_TESTNET_CONTRIBUTOR = 20.0
+TOKENS_PER_TESTNET_CONTRIBUTOR = 40.0
+TOKENS_PER_OG_CONTRIBUTOR = 100.0
 
 
 def extract_starknet_addresses(file_path):
@@ -32,10 +33,7 @@ def extract_starknet_addresses(file_path):
 
 
 def normalize_sn_address(address: str) -> str:
-    try:
-        return hex(int(address, 0))
-    except ValueError:  # TODO remove this
-        return address
+    return hex(int(address, 0))
 
 
 def normalize_addresses_in_map(address_map: Dict[str, Any]) -> Dict[str, Any]:
@@ -47,20 +45,8 @@ def normalize_addresses_in_map(address_map: Dict[str, Any]) -> Dict[str, Any]:
 def get_token_distribution_round_4() -> Dict[str, int]:
     distribution_model = {
         "allocated for points": 8_000_000,
-        "Specific users": 20_000,  # not used
-        "Lead Ambassadors": 0,  # not used
-        "Ambassadors1": 600_000,
-        "Ambassadors2": 0,
-        "Carmine watch (Moderators)": 200_000,
         "Community devs (DeRisk)": 200_000,
-        "Community devs (Konoha)": 200_000,
-        "OG discord users": 3350,
-        "testnet users": 9420,
-        "KOLs": 200_000,
-        "zealy users": 100_000,
-        "Galxe user": 100_000,
-        "Gitcoin contributors": 200_000,
-        "Galxe flippening": 20_000
+        "Community devs (Konoha)": 200_000
     }
 
     # Lead ambassadors, ambassadors, moderators, investors
@@ -75,7 +61,6 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45': 87_500,
         '0x0639F7aD800Fcbe2aD56E3b000f9A0581759CcE989b3Ee09477055c0816A12c7': 70_000,
         '0x053eAD44Bb90853003d70E6930000Ef8C4a4819493fDC8f1CbdC1282121498eC': 52_500
-        # TODO this address in red
     }
     moderators_norm = normalize_addresses_in_map(moderators)
 
@@ -86,19 +71,20 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         '0x000928e2956ad7138c273120412bf2283d83e985b2426c2b8ddf146fd6b37884': 41_072,
         '0x02ba1c396a2a3bd5dcc62fe3f9bd9f85eaa6580609bb903ccbb8aad374cf3f76': 74_139,
         '0x05bb61ab3472556d0151bb4fa22e3514d1a490cb31229b7bcca33744afd5858f': 44_921,
-        '0x046d95a7f86ec19412a4da5d28f6a6addf62f1cd2c5d0defbe18bff1d96a2458': 0,   # TODO confirm
+        '0x046d95a7f86ec19412a4da5d28f6a6addf62f1cd2c5d0defbe18bff1d96a2458': 0,
         '0x049c691d23cf572e3318472dac01d5a6d996470aa1050af0ccadda392c073efb': 64_270,
         '0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d': 29_201,
         '0x06Ae3E526C67A3f38393034abAC34E8274A5683c2c4f00D6aeFEa98057daE5Af': 42_903,
         '0x055f973e925Fba11C9cEA1565ff000f196a7DdfCb73c7292774a8d5408FA6bF4': 43_870,
-        'ak': 36_663  # TODO add address
+        # 'ak': 36_663  # get next token allocation if provide the address
     }
     ambassadors_f_norm = normalize_addresses_in_map(ambassadors_f)
 
     # investors
     investors = {
-        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': 3_000_000,  # TODO doublecheck numbers
-        '0x056d761e1e5d1918dba05de02afdbd8de8da01a63147dce828c9b1fe9227077d': 17_000_000
+        '0x05a4523982b437aadd1b5109b6618c46f7b1c42f5f9e7de1a3b84091f87d411b': 3_000_000,
+        '0x01d54e7bb22bdaf09bea5a05781d861c97cd6edeb84abd6714db69d6036856d3': 2_500_000,
+        '0x056d761e1e5d1918dba05de02afdbd8de8da01a63147dce828c9b1fe9227077d': 14_500_000  # multisig
     }
     investors_norm = normalize_addresses_in_map(investors)
 
@@ -106,14 +92,14 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     KOL = {
         '0x04e7F967f9b075D309E052f2Ac0d9A2F5a6DcD130BFe6e8906A84b3BE7104529': 16_000,
         '0x07Ba5bA6F3146E5715452339Ec8871bAD3d991686A042dBCEcEdC5a6e103Ae5b': 12_000,
-        'vd': 18_000  # TODO add address
+        # 'vd': 18_000  # next token allocation if provide address.
     }
     KOL_norm = normalize_addresses_in_map(KOL)
 
     # Core Team
     core_team = {
         '0x00d79a15d84f5820310db21f953a0fae92c95e25d93cb983cc0c27fc4c52273c': 7_001_443,
-        'm': 0,  # TODO wb martin?
+        # 'm': 0,  # went to multisig
         '0x06e2c2a5da2e5478b1103d452486afba8378e91f32a124f0712f09edd3ccd923': 2_774_035,
         '0x03d1525605db970fa1724693404f5f64cba8af82ec4aab514e6ebd3dec4838ad': 1_818_602,
         '0x062c290f0afa1ea2d6b6d11f6f8ffb8e626f796e13be1cf09b84b2edaa083472': 116_389,
@@ -129,15 +115,16 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     }
     core_team_norm = normalize_addresses_in_map(core_team)
 
-    # user points  # TODO replace source with correct timestamp
+    # user points
     user_points = pd.read_csv(USER_POINTS_FILE_PATH)
     user_points['user_points_total'] = user_points.apply(lambda x: (
             x.trading_points * TRADING_MULTIPLIER + x.liquidity_points * LIQUIDITY_MULTIPLIER
             + x.referral_points * REFERRAL_MULTIPLIER + x.vote_points * VOTE_MULTIPLIER
     ), axis=1)
     user_points.user_address = user_points.user_address.apply(lambda x: normalize_sn_address(x))
-    tokens_per_point = distribution_model["allocated for points"]/user_points.user_points_total.sum()
+    tokens_per_point = distribution_model["allocated for points"] / user_points.user_points_total.sum()
     user_points['user_tokens'] = user_points.user_points_total * tokens_per_point
+    print(f"Tokens for user points: {user_points['user_tokens'].sum()}")
 
     assert len(user_points.user_address.unique()) == user_points.shape[0], "Addresses for timestamp are not unique"
     user_points_norm = {row.user_address: row.user_tokens for _, row in user_points.iterrows()}
@@ -200,14 +187,16 @@ def get_token_distribution_round_4() -> Dict[str, int]:
     testnet_contributors_norm = {
         address: token_per_testnet_contributor for address in testnet_addresses
     }
+    print(f"Tokens for testnet users: {sum(testnet_contributors_norm.values())}")
 
     # OG contributors
     og_user_addresses = extract_starknet_addresses(OG_USERS_FILE_PATH)
     og_user_addresses = {normalize_sn_address(address) for address in og_user_addresses}
-    token_per_og_contributor = distribution_model["OG discord users"] / len(og_user_addresses)
+    token_per_og_contributor = TOKENS_PER_OG_CONTRIBUTOR
     og_contributors_norm = {
         address: token_per_og_contributor for address in og_user_addresses
     }
+    print(f"Tokens for OG users: {sum(og_contributors_norm.values())}")
 
     all_contributor_maps = [
         core_team_norm,
@@ -221,10 +210,7 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         og_contributors_norm,
         testnet_contributors_norm,
         fsusers_norm,
-        KOL_norm,
-        # zealy_users_norm,
-        # galxe_users_norm,
-        # gitcoin_contributors_norm,
+        KOL_norm
     ]
     all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
@@ -235,6 +221,29 @@ def get_token_distribution_round_4() -> Dict[str, int]:
         for k in all_contributor_addresses
     }
     print(f"\033[93mTotal distributed in 4th round:\033[0m {sum(total_tokens.values()):_}")
+
+    #
+    df = pd.DataFrame(index=list(all_contributor_addresses))
+
+    # Add each contributor map as a column in the DataFrame
+    column_names = [
+        "core_team", "ambassadors", "moderators", 'ambassadors_f_norm',
+        'investors_norm',
+        'user_points_norm',
+        'konoha_contributors_norm',
+        'derisk_contributors_norm',
+        'og_contributors_norm',
+        'testnet_contributors_norm',
+        'fsusers_norm',
+        'KOL_norm'
+    ]
+
+    for column_name, contributors_map in zip(column_names, all_contributor_maps):
+        df[column_name] = df.index.map(contributors_map).fillna(0)
+
+    # Calculate the total points for each contributor
+    df['total'] = df.sum(axis=1)
+    df.to_csv("round_4_per_cat.csv")
 
     # Round down the tokens
     def _adjust_tokens_number(tokens: float) -> str:
