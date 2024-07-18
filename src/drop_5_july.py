@@ -11,7 +11,7 @@ LIQUIDITY_MULTIPLIER = 1
 TRADING_MULTIPLIER = 1
 TOKEN_PER_POINT = 0.3
 
-USER_POINTS_FILE_PATH = 'src/allocation_four_docs/user-POINTS-2024-07-18.csv'
+USER_POINTS_FILE_PATH = 'src/allocation_five_docs/output-5th-drop.csv'
 
 
 def normalize_sn_address(address: str) -> str:
