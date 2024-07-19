@@ -5,6 +5,8 @@ from typing import Dict, Any
 import pandas as pd
 
 
+ROUND = 5
+
 REFERRAL_MULTIPLIER = 1
 VOTE_MULTIPLIER = 1
 LIQUIDITY_MULTIPLIER = 1
@@ -39,7 +41,9 @@ def get_token_distribution_round_5() -> Dict[str, int]:
     assert len(user_points.user_address.unique()) == user_points.shape[0], "Addresses for timestamp are not unique"
     user_points_norm = {row.user_address: row.user_tokens for _, row in user_points.iterrows()}
 
-    marketing_norm = {normalize_sn_address(''): 0}  # TODO add address and amount
+    marketing_norm = {
+        normalize_sn_address('0x021b097eb631d98bde191bac41d88fca8d7e0ac50df4381ea235912c152a5ae6'): 125_000
+    }
 
     cl_norm = {normalize_sn_address(''): 0}  # TODO add address and amount
 
@@ -56,22 +60,16 @@ def get_token_distribution_round_5() -> Dict[str, int]:
         ])
         for k in all_contributor_addresses
     }
-    print(f"\033[93mTotal distributed in 4th round:\033[0m {sum(total_tokens.values()):_}")
+    print(f"\033[93mTotal distributed in {ROUND}th round:\033[0m {sum(total_tokens.values()):_}")
 
     #
     df = pd.DataFrame(index=list(all_contributor_addresses))
 
     # Add each contributor map as a column in the DataFrame
     column_names = [
-        "core_team", "ambassadors", "moderators", 'ambassadors_f_norm',
-        'investors_norm',
-        'user_points_norm',
-        'konoha_contributors_norm',
-        'derisk_contributors_norm',
-        'og_contributors_norm',
-        'testnet_contributors_norm',
-        'fsusers_norm',
-        'KOL_norm'
+        "user_points_norm",
+        "marketing_norm",
+        "cl_norm"
     ]
 
     for column_name, contributors_map in zip(column_names, all_contributor_maps):
@@ -79,7 +77,7 @@ def get_token_distribution_round_5() -> Dict[str, int]:
 
     # Calculate the total points for each contributor
     df['total'] = df.sum(axis=1)
-    df.to_csv("round_4_per_cat.csv")
+    df.to_csv(f"round_{ROUND}_per_cat.csv")
 
     # Round down the tokens
     def _adjust_tokens_number(tokens: float) -> str:
@@ -104,9 +102,9 @@ def get_token_distribution_round_5() -> Dict[str, int]:
     res_df = pd.DataFrame({'address': fifth_dist.keys(), 'tokens': fifth_dist.values()})
     res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
     res_df = res_df.sort_values('tokens', ascending = False)
-    res_df.to_csv("prelim_round_5.csv", index = False)
+    res_df.to_csv(f"prelim_round_{ROUND}.csv", index = False)
 
-    # Load second distribution
+    # Load previous distribution
     with open('fourth_distribution_calculated.json', 'r') as infile:
         fourth_dist = {
             x['address']: x['amount'] for x in json.load(infile)
@@ -116,7 +114,7 @@ def get_token_distribution_round_5() -> Dict[str, int]:
         k: int(fourth_dist.get(k, 0)) + int(fifth_dist.get(k, 0))
         for k in set(fourth_dist) | set(fifth_dist)
     }
-    print(f"\033[93mTotal distributed in four rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
+    print(f"\033[93mTotal distributed in {ROUND} rounds:\033[0m {sum(total_tokens_combined.values()) / 10**18:_}")
 
     # Assert that there is truly no non-normalized address
     non_normalized = [
