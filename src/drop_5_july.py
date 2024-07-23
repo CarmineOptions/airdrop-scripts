@@ -45,12 +45,10 @@ def get_token_distribution_round_5() -> Dict[str, int]:
         normalize_sn_address('0x021b097eb631d98bde191bac41d88fca8d7e0ac50df4381ea235912c152a5ae6'): 125_000
     }
 
-    cl_norm = {normalize_sn_address(''): 0}  # TODO add address and amount
 
     all_contributor_maps = [
         user_points_norm,
-        marketing_norm,
-        cl_norm
+        marketing_norm
     ]
     all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
