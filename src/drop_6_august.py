@@ -160,7 +160,7 @@ def get_token_distribution_round_6() -> Dict[str, int]:
         raise ValueError(f"Some addresses are not normalized:\n {non_normalized}")
 
     final_json = [
-        {'address': address, 'amount': val}
+        {'address': address, 'amount': str(val)}
         for address, val in total_tokens_combined.items()
     ]
     open(f'{ROUND}th_distribution_calculated.json', 'w+').write(json.dumps(final_json))
