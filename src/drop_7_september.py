@@ -59,24 +59,7 @@ def get_token_distribution_round_7() -> None:
     }
     print(f"Total tokens for referral and voting: {sum(user_points_referral_and_voting_norm.values())}")
 
-    community = {
-        "0x018D4756921D34b0026731F427C6b365687Ce61CE060141Bf26867f0920D2191": 6000,
-        "0x01fb62ac54f9fa99e1417f83bcb88485556427397f717ed4e7233bc99be31bff": 6000,
-        "0x054e0ab67bd384312d640915b55d7e918fe2031269ec26f8fc7fde9abbd1e0a5": 10000,
-        "0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d": 8000,
-        "0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45": 8000,
-        "0x04a8713ab7aff5e97fb1aa7652314a5ed6102b200da75ef42078a5a01fef4093": 4000,
-        "0x00aa7fe49a402af47bf2bcfee7e356a5ae18db0adedaa2c44a1de60c6ef9caef": 4000,
-        "0x0558808A3C00c778C93E3d4348687b048613993E6b03836726B5d581f9960515": 4000,
-        "0x000928e2956ad7138c273120412bf2283d83e985b2426c2b8ddf146fd6b37884": 4000,
-        "0x02ba1c396a2a3bd5dcc62fe3f9bd9f85eaa6580609bb903ccbb8aad374cf3f76": 4000,
-        "0x05bb61ab3472556d0151bb4fa22e3514d1a490cb31229b7bcca33744afd5858f": 4000,
-        "0x046d95a7f86ec19412a4da5d28f6a6addf62f1cd2c5d0defbe18bff1d96a2458": 4000,
-        "0x049c691d23cf572e3318472dac01d5a6d996470aa1050af0ccadda392c073efb": 4000,
-        "0x06Ae3E526C67A3f38393034abAC34E8274A5683c2c4f00D6aeFEa98057daE5Af": 4000,
-        "0x055f973e925Fba11C9cEA1565ff000f196a7DdfCb73c7292774a8d5408FA6bF4": 4000,
-        "0x0639F7aD800Fcbe2aD56E3b000f9A0581759CcE989b3Ee09477055c0816A12c7": 2000,
-    }
+    community = {}
 
     community_norm = normalize_addresses_in_map(community)
     print(f"Total tokens for COMMUNITY: {sum(community_norm.values())}")
