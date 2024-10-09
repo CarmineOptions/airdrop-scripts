@@ -60,6 +60,7 @@ def get_token_distribution_round_8() -> None:
     print(f"Total tokens for referral and voting: {sum(user_points_referral_and_voting_norm.values())}")
 
     community = {
+        '0x018D4756921D34b0026731F427C6b365687Ce61CE060141Bf26867f0920D2191': 2000,
         '0x054e0ab67bd384312d640915b55d7e918fe2031269ec26f8fc7fde9abbd1e0a5': 2300,
         '0x039e14d815587cdd5ae400684e5d60848d9a134b378260cc1f2de6e7aedcdb45': 2000,
         '0x0558808A3C00c778C93E3d4348687b048613993E6b03836726B5d581f9960515': 1500,
@@ -68,7 +69,6 @@ def get_token_distribution_round_8() -> None:
         '0x050c439fCfA077cd4a1ff4477C5242D4781010D9B1C0f1e2a96980896eD63A38': 2200,
         '0x05bb61ab3472556d0151bb4fa22e3514d1a490cb31229b7bcca33744afd5858f': 1500,
         '0x06496c659adab5aeeb34d7767f697ad41abfec046584313fe54fc304804fb195': 2000,
-        '': 1500
     }
 
     community_norm = normalize_addresses_in_map(community)
@@ -90,7 +90,38 @@ def get_token_distribution_round_8() -> None:
     }
     print(f"\033[93mTotal distributed in {ROUND}th round:\033[0m {sum(total_tokens.values()):_}")
 
-    #
+    #################### adjust allocation for selected users: ####################e
+    sel_users = [
+        0x029c339266a9ad35d5Cc64c23bf13b7156e72c27B7dF743661537A98Af8260b3,
+        0x01f756725531f4d85790382430ef13a0d9acc0eb149f443febc1bcdc1ea7ce2e,
+        0x001d2866c8604932058868F0865095BEce599ec576C5Cc0F2CA8B4714Df7128A,
+        0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d,
+        0x0449E8CdA692fC1F791F721B36Aa4d636393e160C9B561396F07787f82D02815,
+        0x02D86897DaaDeE2DFFDB5C5B734aB568fE849808105977e0384F8E5D1a0d33D7,
+        0x0718505b87b5a448205ae22ac84a21b9e568b532ed95285c4c03973f8b1a73e8,
+        0x067Aa1C8B9dBaf98d8A83D57b31185c9c29868d329c3bF9Ee3a0d6820f95D4a1,
+        0x01dc8f0c2077757132d16daabc9f9e23336872ac351fd75979f0362dccd1bd49
+    ]
+    sel_user_hexes = [hex(u) for u in sel_users]
+    for allocation_map in  [
+        user_points_trading_norm,
+        user_points_liquidity_providers_norm,
+        user_points_referral_and_voting_norm
+    ]:
+        for sel_user in sel_user_hexes:
+            allocated_amount = allocation_map.get(sel_user, 0)
+            if allocated_amount:
+                allocation_map[sel_user] = allocated_amount * 1.1
+        # Sum everything
+    total_tokens_0 = {
+        k: sum([
+            contributors_map.get(k, 0) for contributors_map in all_contributor_maps
+        ])
+        for k in all_contributor_addresses
+    }
+    print(f"\033[93mExtra tokens distributed:\033[0m {sum(total_tokens_0.values()) - sum(total_tokens.values()):_}")
+    ###########################################################################################
+
     df = pd.DataFrame(index=list(all_contributor_addresses))
 
     # Add each contributor map as a column in the DataFrame
