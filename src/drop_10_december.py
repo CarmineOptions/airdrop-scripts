@@ -131,7 +131,7 @@ def get_token_distribution_round_10() -> None:
     }
 
     # exclude faulty addresses
-    faulty_addresses = []
+    faulty_addresses = ['0x1']
     for address in faulty_addresses:
         del sixth_dist[address]
 
