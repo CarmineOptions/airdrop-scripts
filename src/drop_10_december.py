@@ -68,6 +68,7 @@ def get_token_distribution_round_10() -> None:
         '0x00a975351cf03ad81d5d08f953dcc415da07012ff6d2d44a074c384feb0db35d': 2200,
         '0x049c691d23cf572e3318472dac01d5a6d996470aa1050af0ccadda392c073efb': 1500,
         '0x04FDbFdfae3661Ea118167b34B0C91594342B5Cc522824a704ADB4dB86F86a31': 2200,
+        '0x027994c503bd8C32525FBDAf9d398bDd4e86757988C64581B055A06c5955eA49': 250_000,
     }
 
     community_norm = normalize_addresses_in_map(community)
