@@ -23,50 +23,56 @@ def calculate_token_distribution(
     community_distr: Dict[str, int],
     faulty_address_list: List[str] | None = None
 ) -> None:
-    # user points
-    user_points = pd.read_csv(user_points_file_path)
-    user_points.user_address = user_points.user_address.apply(lambda x: normalize_sn_address(x))
+    if user_points_file_path:
+        # user points
+        user_points = pd.read_csv(user_points_file_path)
+        user_points.user_address = user_points.user_address.apply(lambda x: normalize_sn_address(x))
 
-    user_points['user_points_referral_and_voting'] = user_points.apply(lambda x: (
-            x.referral_points + x.vote_points
-    ), axis=1)
+        user_points['user_points_referral_and_voting'] = user_points.apply(lambda x: (
+                x.referral_points + x.vote_points
+        ), axis=1)
 
-    user_points_liquidity_providers_total = user_points.liquidity_points.sum()
-    tokens_per_point_liquidity_providers = total_distribution_for_liquidity_providers / user_points_liquidity_providers_total
+        user_points_liquidity_providers_total = user_points.liquidity_points.sum()
+        tokens_per_point_liquidity_providers = total_distribution_for_liquidity_providers / user_points_liquidity_providers_total
 
-    user_points_traders_total = user_points.trading_points.sum()
-    tokens_per_point_traders = total_distribution_for_trading / user_points_traders_total
+        user_points_traders_total = user_points.trading_points.sum()
+        tokens_per_point_traders = total_distribution_for_trading / user_points_traders_total
 
-    print(f"Tokens for user points: \n   Liquidity porviders: {tokens_per_point_liquidity_providers} \n"
-          f"   Traders / Refferal / Voting: {tokens_per_point_traders}")
+        print(f"Tokens for user points: \n   Liquidity porviders: {tokens_per_point_liquidity_providers} \n"
+              f"   Traders / Refferal / Voting: {tokens_per_point_traders}")
 
-    assert len(user_points.user_address.unique()) == user_points.shape[0], "Addresses for timestamp are not unique"
+        assert len(user_points.user_address.unique()) == user_points.shape[0], "Addresses for timestamp are not unique"
 
-    user_points_trading_norm = {
-        row.user_address: row.trading_points * tokens_per_point_traders
-        for _, row in user_points.iterrows()
-    }
-    print(f"Total tokens for trading: {sum(user_points_trading_norm.values())}")
-    user_points_liquidity_providers_norm = {
-        row.user_address: row.liquidity_points * tokens_per_point_liquidity_providers
-        for _, row in user_points.iterrows()
-    }
-    print(f"Total tokens for providing liquidity: {sum(user_points_liquidity_providers_norm.values())}")
-    user_points_referral_and_voting_norm = {
-        row.user_address: row.user_points_referral_and_voting * tokens_per_point_traders
-        for _, row in user_points.iterrows()
-    }
-    print(f"Total tokens for referral and voting: {sum(user_points_referral_and_voting_norm.values())}")
+        user_points_trading_norm = {
+            row.user_address: row.trading_points * tokens_per_point_traders
+            for _, row in user_points.iterrows()
+        }
+        print(f"Total tokens for trading: {sum(user_points_trading_norm.values())}")
+        user_points_liquidity_providers_norm = {
+            row.user_address: row.liquidity_points * tokens_per_point_liquidity_providers
+            for _, row in user_points.iterrows()
+        }
+        print(f"Total tokens for providing liquidity: {sum(user_points_liquidity_providers_norm.values())}")
+        user_points_referral_and_voting_norm = {
+            row.user_address: row.user_points_referral_and_voting * tokens_per_point_traders
+            for _, row in user_points.iterrows()
+        }
+        print(f"Total tokens for referral and voting: {sum(user_points_referral_and_voting_norm.values())}")
 
     community_norm = normalize_addresses_in_map(community_distr)
     print(f"Total tokens for COMMUNITY: {sum(community_norm.values())}")
 
-    all_contributor_maps = [
-        user_points_trading_norm,
-        user_points_liquidity_providers_norm,
-        user_points_referral_and_voting_norm,
-        community_norm
-    ]
+    if user_points_file_path:
+        all_contributor_maps = [
+            user_points_trading_norm,
+            user_points_liquidity_providers_norm,
+            user_points_referral_and_voting_norm,
+            community_norm
+        ]
+    else:
+        all_contributor_maps = [
+            community_norm
+        ]
     all_contributor_addresses = {address for contributors in all_contributor_maps for address in contributors}
     # Sum everything
     total_tokens = {
@@ -113,7 +119,7 @@ def calculate_token_distribution(
         )
         return rounded_number_of_tokens.to_eng_string()
 
-    sixth_dist = {
+    dist_final = {
         address: _adjust_tokens_number(tokens)
         for address, tokens in total_tokens.items()
     }
@@ -121,10 +127,11 @@ def calculate_token_distribution(
     # exclude faulty addresses
     if faulty_address_list:
         for address in faulty_address_list:
-            del sixth_dist[address]
+            if address in dist_final:
+                del dist_final[address]
 
     # Uncomment this part to save prelims to csv
-    res_df = pd.DataFrame({'address': sixth_dist.keys(), 'tokens': sixth_dist.values()})
+    res_df = pd.DataFrame({'address': dist_final.keys(), 'tokens': dist_final.values()})
     res_df['tokens'] = res_df['tokens'].map(lambda x: int(x) / 10 ** 18)
     res_df = res_df.sort_values('tokens', ascending = False)
     res_df.to_csv(f"prelim_round_{round_number}.csv", index = False)
@@ -136,8 +143,8 @@ def calculate_token_distribution(
         }
     # Combine current airdrop with previous
     total_tokens_combined = {
-        k: int(last_dist.get(k, 0)) + int(sixth_dist.get(k, 0))
-        for k in set(last_dist) | set(sixth_dist)
+        k: int(last_dist.get(k, 0)) + int(dist_final.get(k, 0))
+        for k in set(last_dist) | set(dist_final)
     }
     print(f"\033[93mTotal distributed in {round_number} rounds:\033[0m {sum(total_tokens_combined.values()) / 10 ** 18:_}")
 
